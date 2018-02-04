@@ -3,6 +3,7 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 )
 
 const NC string = "\033[0m" // No Color
@@ -37,4 +38,39 @@ func CreateFromMap(m map[string]interface{}, result interface{}) error {
 
 func PrintColor(phrase string, color string) string {
 	return fmt.Sprintf("\033[0;%sm%s%s", COLOR[color], phrase, NC)
+}
+
+func PrintValues(object interface{}, path string, blocked []string) string {
+	var result string
+	s := reflect.ValueOf(object).Elem()
+	typeOfT := s.Type()
+	result = ""
+	for i := 0; i < s.NumField(); i++ {
+		f := s.Field(i)
+		if stringInSlice(typeOfT.Field(i).Name, blocked) || valueIsEmpty(f.Type().String(), f.Interface()) {
+			continue
+		}
+		result += fmt.Sprintf("%s%s : %v\n", path,
+			typeOfT.Field(i).Name, f.Interface())
+	}
+	return result
+}
+
+func stringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}
+
+func valueIsEmpty(typ string, a interface{}) bool {
+	switch typ {
+	case "string":
+		if len(a.(string)) == 0 {
+			return true
+		}
+	}
+	return false
 }

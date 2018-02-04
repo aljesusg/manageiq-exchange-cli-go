@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	info "manageiq-exchange/models/info"
 	meta "manageiq-exchange/models/metadata"
+	user "manageiq-exchange/models/user"
 	"net"
 	"net/http"
 	"time"
@@ -32,8 +33,8 @@ type Api struct {
 }
 
 type DataApi struct {
-	Data map[string]interface{} `json:"data"`
-	Meta meta.Metadata          `json:"meta"`
+	Data interface{}   `json:"data"`
+	Meta meta.Metadata `json:"meta"`
 }
 
 func (a *Api) Init(server string, port int) {
@@ -49,17 +50,22 @@ func (a *Api) URL() string {
 func (a *Api) GetInfo() info.Info {
 	a.Request("GET", "", nil)
 	var info info.Info
-	info.Init(a.Data.Data)
+	info.Init(a.Data.Data.(map[string]interface{}))
 	return info
 }
 
-func (a *Api) GetUsers(expand bool) interface{} {
+func (a *Api) GetUsers(expand bool) user.UserCollection {
 	var path string
 	if path = "/v1/users"; expand {
 		path = "/v1/users?expand=resources"
 	}
-	a.Request("GET", path, nil)
-	return ""
+	err := a.Request("GET", path, nil)
+	if err != nil {
+		fmt.Printf("%+v", err)
+	}
+	var users user.UserCollection
+	users.Init(a.Data.Data.([]interface{}))
+	return users
 }
 
 func (a *Api) Request(method string, path string, data io.Reader) error {

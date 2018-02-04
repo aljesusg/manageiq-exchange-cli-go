@@ -1,7 +1,7 @@
 package metadata
 
 type Metadata struct {
-	current_page int `json:"current_page"`
-	total_pages  int `json:"total_pages"`
-	total_count  int `json:"total_count"`
+	CurrentPage int `json:"current_page"`
+	TotalPages  int `json:"total_pages"`
+	TotalCount  int `json:"total_count"`
 }

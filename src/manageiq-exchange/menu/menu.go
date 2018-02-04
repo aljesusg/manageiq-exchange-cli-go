@@ -40,7 +40,8 @@ func Menu() {
 	}
 
 	if users {
-		fmt.Printf("Users : %s", miq_exchange.GetUsers(expand))
+		users := miq_exchange.GetUsers(expand)
+		fmt.Printf(users.Print(miq_exchange.Data.Meta.TotalCount))
 	}
 
 }

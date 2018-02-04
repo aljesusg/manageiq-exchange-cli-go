@@ -12,6 +12,8 @@ sudo: false
 install:
     - go get -v github.com/alecthomas/gometalinter
     - gometalinter --install
+    - go get golang.org/x/tools/cmd/cover
+    - go get github.com/modocache/gover
 script:
     - export PATH=$PATH:$HOME/gopath/bin
     - export GORACE="halt_on_error=1"
@@ -22,8 +24,8 @@ script:
       --enable=gosimple
       --enable=unconvert
       --deadline=4m ./spew | tee /dev/stderr)"
-    - go test -v -race -tags safe ./manageiq-exchange
-    - go test -v -race -tags testcgo ./manageiq-exchange -covermode=atomic -coverprofile=profile.cov
+    - make test
+    - make CI-Coverage
 after_success:
     - go get -v github.com/mattn/goveralls
-    - goveralls -coverprofile=profile.cov -service=travis-ci
+    - goveralls -coverprofile=gover.coverprofile -service=travis-ci

@@ -75,7 +75,7 @@ CI-Coverage:
 		@i=a ; \
 		while read -r P; do \
 			i=a$$i ; \
-			$(GOCMD) test ./src/$$P -cover -coverpkg $$P -covermode=count -coverprofile=$$i.coverprofile; \
+			$(GOCMD) test ./src/$$P -cover -coverpkg $$P -covermode=atomic -coverprofile=$$i.coverprofile; \
 		done <coverage/packages
 
 .PHONY: clean

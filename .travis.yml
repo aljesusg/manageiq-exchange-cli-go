@@ -13,7 +13,7 @@ install:
     - go get -v github.com/alecthomas/gometalinter
     - gometalinter --install
     - go get golang.org/x/tools/cmd/cover
-    - go get github.com/modocache/gover
+    - go get -v github.com/mattn/goveralls
 script:
     - export PATH=$PATH:$HOME/gopath/bin
     - export GORACE="halt_on_error=1"
@@ -26,7 +26,3 @@ script:
       --deadline=4m ./spew | tee /dev/stderr)"
     - make test
     - make CI-Coverage
-    - gover
-after_success:
-    - go get -v github.com/mattn/goveralls
-    - goveralls -coverprofile=gover.coverprofile -service=travis-ci

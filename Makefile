@@ -67,17 +67,9 @@ coverage:
 		$(GOCMD) tool cover -html=coverage/coverage
 
 .PHONY: CI-Coverage
-CI-Coverage:
-	  go get github.com/modocache/gover
-		rm -fr coverage
-		mkdir -p coverage
-		$(GOCMD) list $(PROJECT)/... > coverage/packages
-		@i=a ; \
-		while read -r P; do \
-			i=a$$i ; \
-			$(GOCMD) test ./src/$$P -cover -coverpkg $$P -covermode=atomic -coverprofile=$$i.coverprofile; \
-		done <coverage/packages
-
+CI-Coverage: coverage
+		go get -v github.com/mattn/goveralls
+		goveralls -coverprofile=coverage/coverage -service=travis-ci -covermode=count
 .PHONY: clean
 clean:
 	rm -fR bin pkg

@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	info "manageiq-exchange/models/info"
+	meta "manageiq-exchange/models/metadata"
 	"net"
 	"net/http"
 	"time"
-	"manageiq-exchange/models"
 )
 
 var netTransport = &http.Transport{
@@ -30,12 +31,12 @@ type Api struct {
 	Data   DataApi
 }
 
-type DataApi struct{
-	Data   map[string]interface{}     `json:"data"`
-	Meta   models.Metadata `json:"meta"`
+type DataApi struct {
+	Data map[string]interface{} `json:"data"`
+	Meta meta.Metadata          `json:"meta"`
 }
 
-func (a *Api) Init(server string, port int){
+func (a *Api) Init(server string, port int) {
 	a.Server = server
 	a.Port = port
 	a.Client = netClient
@@ -45,9 +46,9 @@ func (a *Api) URL() string {
 	return fmt.Sprintf("http://%s:%d", a.Server, a.Port)
 }
 
-func (a *Api) GetInfo() models.Info {
+func (a *Api) GetInfo() info.Info {
 	a.Request("GET", "", nil)
-	var info models.Info
+	var info info.Info
 	info.Init(a.Data.Data)
 	return info
 }

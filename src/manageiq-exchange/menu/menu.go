@@ -1,12 +1,12 @@
 package menu
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"manageiq-exchange/api"
 	"manageiq-exchange/constants"
 	"os"
-	"errors"
 )
 
 func Menu() {
@@ -31,12 +31,12 @@ func Menu() {
 	if err != nil {
 		fmt.Print(err)
 	}
-	var miq_exchange  api.Api
+	var miq_exchange api.Api
 	miq_exchange.Init(server, port)
 
 	if version {
-			info := miq_exchange.GetInfo()
- 		  fmt.Printf(info.Print())
+		info := miq_exchange.GetInfo()
+		fmt.Printf(info.Print())
 	}
 
 	if users {

@@ -1,4 +1,4 @@
-package models
+package metadata
 
 type Metadata struct {
 	current_page int `json:"current_page"`

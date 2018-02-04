@@ -26,6 +26,7 @@ script:
       --deadline=4m ./spew | tee /dev/stderr)"
     - make test
     - make CI-Coverage
+    - gover
 after_success:
     - go get -v github.com/mattn/goveralls
     - goveralls -coverprofile=gover.coverprofile -service=travis-ci

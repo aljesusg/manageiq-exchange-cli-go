@@ -75,9 +75,8 @@ CI-Coverage:
 		@i=a ; \
 		while read -r P; do \
 			i=a$$i ; \
-			$(GOCMD) test ./src/$$P -cover -coverpkg $$P -covermode=count -coverprofile=coverage/$$i.coverprofile; \
+			$(GOCMD) test ./src/$$P -cover -coverpkg $$P -covermode=count -coverprofile=$$i.coverprofile; \
 		done <coverage/packages
-		gover coverage/ gover.coverprofile
 
 .PHONY: clean
 clean:

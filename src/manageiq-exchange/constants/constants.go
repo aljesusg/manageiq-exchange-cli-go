@@ -5,9 +5,14 @@ const SERVICE = "manageiq-exchange"
 const RESOURCE_PREFIX = "//" + SERVICE
 
 var VERSION = "dev"
+
 var COMMIT = "-"
+
 var BUILD_DATE = "-"
+
+
 var SERVICEAPIVERSION = "v0"
+
 
 var BANNER_3D = `
 

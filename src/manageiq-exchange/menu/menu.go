@@ -19,7 +19,7 @@ func Menu() {
 	var users bool
 	var expand bool
 	flag.StringVar(&host, "host", "localhost", "specify host to use.  defaults to localhost.")
-	flag.IntVar(&port, "port", 3000, "specify port to use.  defaults to 3000")
+	flag.IntVar(&port, "port", 0, "specify port to use.")
 	flag.BoolVar(&version, "version", false, "About version")
 	flag.BoolVar(&providers, "providers", false, "About providers")
 	flag.BoolVar(&users, "users", false, "About users")

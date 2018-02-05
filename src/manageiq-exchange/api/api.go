@@ -43,7 +43,11 @@ func (a *Api) Init(server string, port int) {
 }
 
 func (a *Api) URL() string {
-	return fmt.Sprintf("http://%s:%d", a.Server, a.Port)
+	url := fmt.Sprintf("http://%s", a.Server)
+	if a.Port > 0 {
+		url += fmt.Sprintf(":%d", a.Port)
+	}
+	return url
 }
 
 func (a *Api) GetInfo() info.Info {

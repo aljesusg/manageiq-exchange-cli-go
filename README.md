@@ -4,6 +4,7 @@ CLI tool for ManageIQ-Exchange
 [![Go Report Card](https://goreportcard.com/badge/github.com/ManageIQ-Exchange/manageiq-exchange-cli-go)](https://goreportcard.com/report/github.com/ManageIQ-Exchange/manageiq-exchange-cli-go)
 [![Coverage Status](https://coveralls.io/repos/github/ManageIQ-Exchange/manageiq-exchange-cli-go/badge.svg?branch=master)](https://coveralls.io/github/ManageIQ-Exchange/manageiq-exchange-cli-go)
 
+# Banner of CLI
 ```bash
  _____ ______   ________  ________   ________  ________  _______   ___  ________
 |\   _ \  _   \|\   __  \|\   ___  \|\   __  \|\   ____\|\  ___ \ |\  \|\   __  \
